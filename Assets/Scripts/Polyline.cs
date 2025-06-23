@@ -1,12 +1,13 @@
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(LineRenderer))]
 public class Polyline : MonoBehaviour
 {
     public Camera mainCamera;
     public float zDepth = 0f;
-    public GameObject pointPrefab; // Prefab de la esfera
+    public GameObject pointPrefab;
 
     private List<Vector3> points = new List<Vector3>();
     private List<GameObject> pointObjects = new List<GameObject>();
@@ -16,7 +17,6 @@ public class Polyline : MonoBehaviour
     {
         if (!mainCamera) mainCamera = Camera.main;
         lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.positionCount = 0;
         lineRenderer.useWorldSpace = true;
     }
 
@@ -24,6 +24,9 @@ public class Polyline : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+                return;
+
             AddPointFromMouseClick();
         }
 
