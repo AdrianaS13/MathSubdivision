@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Polyline.cs" />
+    <Compile Include="Assets\Scripts\ChaikinCurve.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

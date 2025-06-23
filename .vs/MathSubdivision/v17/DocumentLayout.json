@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|c:\\users\\adria\\documents\\adriana\\esgi\\5\\semestre2\\math\\mathsubdivision\\assets\\scripts\\chaikincurve.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\chaikincurve.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|c:\\users\\adria\\documents\\adriana\\esgi\\5\\semestre2\\math\\mathsubdivision\\assets\\scripts\\polyline.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\polyline.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -23,6 +27,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "ChaikinCurve.cs",
+              "DocumentMoniker": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\ChaikinCurve.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\ChaikinCurve.cs",
+              "ToolTip": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\ChaikinCurve.cs",
+              "RelativeToolTip": "Assets\\Scripts\\ChaikinCurve.cs",
+              "ViewState": "AQIAACsAAAAAAAAAAAAkwDgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T09:22:38.24Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Polyline.cs",
               "DocumentMoniker": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\Polyline.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Polyline.cs",
