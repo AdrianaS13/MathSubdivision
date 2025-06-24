@@ -131,7 +131,6 @@ public class LoopSubdivision : MonoBehaviour
         Vector3[] vertices = mesh.vertices;
         int[] triangles = mesh.triangles;
 
-        // Build vertex and edge data structures
         List<Vertex> vertexList = new List<Vertex>();
         for (int i = 0; i < vertices.Length; i++)
         {
@@ -140,19 +139,16 @@ public class LoopSubdivision : MonoBehaviour
 
         Dictionary<Edge, Edge> edgeDict = new Dictionary<Edge, Edge>();
 
-        // Build topology information
         for (int i = 0; i < triangles.Length; i += 3)
         {
             int v1 = triangles[i];
             int v2 = triangles[i + 1];
             int v3 = triangles[i + 2];
 
-            // Add adjacency information
             AddAdjacency(vertexList, v1, v2);
             AddAdjacency(vertexList, v2, v3);
             AddAdjacency(vertexList, v3, v1);
 
-            // Add edges
             AddEdge(edgeDict, v1, v2, i / 3);
             AddEdge(edgeDict, v2, v3, i / 3);
             AddEdge(edgeDict, v3, v1, i / 3);
@@ -403,11 +399,6 @@ public class LoopSubdivision : MonoBehaviour
         {
             RestoreOriginalCoonPatch();
         }
-
-        GUILayout.Space(10);
-        GUILayout.Label("Controls:");
-        GUILayout.Label("S: Apply subdivision (smooth)");
-        GUILayout.Label("R: Restore original mesh");
 
         GUILayout.EndArea();
     }

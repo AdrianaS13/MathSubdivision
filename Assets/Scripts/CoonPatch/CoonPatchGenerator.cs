@@ -332,8 +332,12 @@ public class CoonPatchGenerator : MonoBehaviour
             ClearSelection();
         }
 
+        GUILayout.Label("Controls:");
         GUILayout.Label("Left Click: Select curve");
         GUILayout.Label("Right Click: Clear selection");
+        GUILayout.Label("S: Apply subdivision (smooth)");
+        GUILayout.Label("B: Apply Butterfly subdivision");
+        GUILayout.Label("R: Restore original mesh");
 
         GUILayout.EndArea();
     }
