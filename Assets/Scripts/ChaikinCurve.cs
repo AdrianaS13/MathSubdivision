@@ -6,16 +6,14 @@ public class ChaikinCurve : MonoBehaviour
 {
     public Polyline sourcePolyline;
     public LineRenderer lineRenderer;
-
     public List<Vector3> currentCurvePoints = new List<Vector3>();
-    public GameObject pointSpherePrefab;  // Asigna en inspector tu prefab de esfera
-
+    public GameObject pointSpherePrefab;
     private List<GameObject> spawnedSpheres = new List<GameObject>();
-
     public int iterations = 1;
-
     [HideInInspector] public float u = 0.6f;
     [HideInInspector] public float v = 0.3f;
+
+    public float colliderThickness = 0.2f; 
 
     private void Start()
     {
@@ -24,7 +22,6 @@ public class ChaikinCurve : MonoBehaviour
         lineRenderer.material.color = Color.blue;
         lineRenderer.startWidth = 0.05f;
         lineRenderer.endWidth = 0.05f;
-
     }
 
     public void SetUV(float newU, float newV)
@@ -46,27 +43,54 @@ public class ChaikinCurve : MonoBehaviour
         }
 
         currentCurvePoints = refined;
-
         lineRenderer.positionCount = refined.Count;
         lineRenderer.SetPositions(refined.ToArray());
 
-        // Limpiar esferas previas
+        // Clear previous spheres
         foreach (var s in spawnedSpheres)
             Destroy(s);
         spawnedSpheres.Clear();
 
-        // Instanciar esfera en cada punto
+        // Create spheres for visualization
         foreach (var p in refined)
         {
             GameObject sphere = Instantiate(pointSpherePrefab, p, Quaternion.identity, this.transform);
             spawnedSpheres.Add(sphere);
+        }
+
+        // Create single collider for curve selection
+        CreateSingleCurveCollider(refined);
+    }
+
+    void CreateSingleCurveCollider(List<Vector3> curvePoints)
+    {
+        BoxCollider existingCollider = GetComponent<BoxCollider>();
+        if (existingCollider != null)
+        {
+            DestroyImmediate(existingCollider);
+        }
+
+        BoxCollider collider = gameObject.AddComponent<BoxCollider>();
+
+        // Calculate bounds of the entire curve
+        if (curvePoints.Count > 0)
+        {
+            Bounds bounds = new Bounds(curvePoints[0], Vector3.zero);
+            foreach (var point in curvePoints)
+            {
+                bounds.Encapsulate(point);
+            }
+
+            // Convert to local space and expand bounds for easier selection
+            bounds.Expand(colliderThickness);
+            collider.center = transform.InverseTransformPoint(bounds.center);
+            collider.size = transform.InverseTransformDirection(bounds.size);
         }
     }
 
     List<Vector3> ChaikinSubdivision(List<Vector3> input, float u, float v)
     {
         List<Vector3> result = new List<Vector3>();
-
         if (input.Count < 2)
             return new List<Vector3>(input);
 
@@ -88,7 +112,14 @@ public class ChaikinCurve : MonoBehaviour
         }
 
         result.Add(input[input.Count - 1]); // conservar último punto
-
         return result;
+    }
+
+    public void SetSelected(bool selected)
+    {
+        if (lineRenderer != null)
+        {
+            lineRenderer.material.color = selected ? Color.red : Color.blue;
+        }
     }
 }

@@ -48,21 +48,49 @@ public class CoonPatchGenerator : MonoBehaviour
                 return;
             }
 
+            // Try to get LineRenderer from the hit ChaikinCurve object
             LineRenderer lr = hit.collider.GetComponent<LineRenderer>();
+            ChaikinCurve chaikinCurve = hit.collider.GetComponent<ChaikinCurve>();
+
+            if (chaikinCurve != null)
+            {
+                lr = chaikinCurve.lineRenderer;
+            }
+
             if (lr != null)
             {
                 if (selectedCurves.Contains(lr))
                 {
                     selectedCurves.Remove(lr);
-                    lr.startColor = Color.white;
-                    lr.endColor = Color.white;
+                    lr.startColor = Color.blue;
+                    lr.endColor = Color.blue;
+
+                    if (chaikinCurve != null)
+                    {
+                        chaikinCurve.SetSelected(false);
+                    }
                 }
                 else if (selectedCurves.Count < 4)
                 {
                     selectedCurves.Add(lr);
                     lr.startColor = Color.red;
                     lr.endColor = Color.red;
+
+                    if (chaikinCurve != null)
+                    {
+                        chaikinCurve.SetSelected(true);
+                    }
+
+                    Debug.Log($"Selected curve. Total selected: {selectedCurves.Count}/4");
                 }
+                else
+                {
+                    Debug.Log("Already have 4 curves selected. Deselect some first.");
+                }
+            }
+            else
+            {
+                Debug.Log($"Hit object '{hitObject.name}' but no LineRenderer found");
             }
         }
     }
