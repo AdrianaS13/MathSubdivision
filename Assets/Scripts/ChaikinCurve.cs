@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 [RequireComponent(typeof(LineRenderer))]
 public class ChaikinCurve : MonoBehaviour
@@ -9,61 +7,30 @@ public class ChaikinCurve : MonoBehaviour
     public Polyline sourcePolyline;
     public LineRenderer lineRenderer;
 
-    public Slider uSlider;
-    public Slider vSlider;
-    public TextMeshProUGUI uValueText;
-    public TextMeshProUGUI vValueText;
-    public Button generateButton;
+    public List<Vector3> currentCurvePoints = new List<Vector3>();
+    public GameObject pointSpherePrefab;  // Asigna en inspector tu prefab de esfera
 
-    public int iterations = 3;
+    private List<GameObject> spawnedSpheres = new List<GameObject>();
 
-    private float u;
-    private float v;
+    public int iterations = 1;
+
+    [HideInInspector] public float u = 0.6f;
+    [HideInInspector] public float v = 0.3f;
 
     private void Start()
     {
         if (!lineRenderer) lineRenderer = GetComponent<LineRenderer>();
+        lineRenderer.material = new Material(Shader.Find("Unlit/Color"));
+        lineRenderer.material.color = Color.blue;
+        lineRenderer.startWidth = 0.05f;
+        lineRenderer.endWidth = 0.05f;
 
-        if (generateButton != null)
-            generateButton.onClick.AddListener(GenerateChaikinCurve);
-
-        UpdateUVFromSliders();
     }
 
-    private void Update()
+    public void SetUV(float newU, float newV)
     {
-        UpdateUVFromSliders();
-        UpdateUIText();
-    }
-
-    void UpdateUVFromSliders()
-    {
-        if (uSlider != null && vSlider != null)
-        {
-            u = uSlider.value;
-            v = vSlider.value;
-
-            // Asegurar que u + v <= 1
-            float sum = u + v;
-            if (sum > 1f)
-            {
-                float scale = 1f / sum;
-                u *= scale;
-                v *= scale;
-            }
-
-            // Actualizar sliders si se modificó
-            uSlider.SetValueWithoutNotify(u);
-            vSlider.SetValueWithoutNotify(v);
-        }
-    }
-
-    void UpdateUIText()
-    {
-        if (uValueText != null)
-            uValueText.text = $"u = {u:F2}";
-        if (vValueText != null)
-            vValueText.text = $"v = {v:F2}";
+        u = newU;
+        v = newV;
     }
 
     public void GenerateChaikinCurve()
@@ -78,20 +45,38 @@ public class ChaikinCurve : MonoBehaviour
             refined = ChaikinSubdivision(refined, u, v);
         }
 
+        currentCurvePoints = refined;
+
         lineRenderer.positionCount = refined.Count;
         lineRenderer.SetPositions(refined.ToArray());
+
+        // Limpiar esferas previas
+        foreach (var s in spawnedSpheres)
+            Destroy(s);
+        spawnedSpheres.Clear();
+
+        // Instanciar esfera en cada punto
+        foreach (var p in refined)
+        {
+            GameObject sphere = Instantiate(pointSpherePrefab, p, Quaternion.identity, this.transform);
+            spawnedSpheres.Add(sphere);
+        }
     }
 
     List<Vector3> ChaikinSubdivision(List<Vector3> input, float u, float v)
     {
         List<Vector3> result = new List<Vector3>();
 
+        if (input.Count < 2)
+            return new List<Vector3>(input);
+
+        result.Add(input[0]); // conservar primer punto
+
         for (int i = 0; i < input.Count - 1; i++)
         {
             Vector3 p0 = input[i];
             Vector3 p1 = input[i + 1];
 
-            // Ordenar u y v para agregar puntos en orden correcto
             float firstParam = Mathf.Min(u, v);
             float secondParam = Mathf.Max(u, v);
 
@@ -102,7 +87,8 @@ public class ChaikinCurve : MonoBehaviour
             result.Add(secondPoint);
         }
 
+        result.Add(input[input.Count - 1]); // conservar último punto
+
         return result;
     }
-
 }

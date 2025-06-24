@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|c:\\users\\adria\\documents\\adriana\\esgi\\5\\semestre2\\math\\mathsubdivision\\assets\\scripts\\chaikincurve.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\assets\\scripts\\chaikincurve.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\chaikincurve.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\assets\\scripts\\polyline.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\polyline.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|c:\\users\\adria\\documents\\adriana\\esgi\\5\\semestre2\\math\\mathsubdivision\\assets\\scripts\\curvemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\curvemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,11 +22,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CurveManager.cs",
+              "DocumentMoniker": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\CurveManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\CurveManager.cs",
+              "ToolTip": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\CurveManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\CurveManager.cs",
+              "ViewState": "AQIAABYAAAAAAAAAAAAcwD0AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T15:13:37.544Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -32,7 +49,7 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\ChaikinCurve.cs",
               "ToolTip": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\ChaikinCurve.cs",
               "RelativeToolTip": "Assets\\Scripts\\ChaikinCurve.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAlAAAA",
+              "ViewState": "AQIAAEsAAAAAAAAAAAAcwHIAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-23T09:22:38.24Z",
               "EditorCaption": ""
@@ -45,9 +62,10 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\Polyline.cs",
               "ToolTip": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\Polyline.cs",
               "RelativeToolTip": "Assets\\Scripts\\Polyline.cs",
-              "ViewState": "AQIAADwAAAAAAAAAAAAuwEgAAAAWAAAA",
+              "ViewState": "AQIAACgAAAAAAAAAAAAcwE8AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-23T09:02:55.78Z"
+              "WhenOpened": "2025-06-23T09:02:55.78Z",
+              "EditorCaption": ""
             }
           ]
         }
