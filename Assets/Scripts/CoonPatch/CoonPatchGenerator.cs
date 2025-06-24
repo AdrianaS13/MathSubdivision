@@ -40,6 +40,14 @@ public class CoonPatchGenerator : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
+            GameObject hitObject = hit.collider.gameObject;
+
+            if (hitObject.name.Contains("CoonPatch"))
+            {
+                Destroy(hitObject);
+                return;
+            }
+
             LineRenderer lr = hit.collider.GetComponent<LineRenderer>();
             if (lr != null)
             {
@@ -194,6 +202,7 @@ public class CoonPatchGenerator : MonoBehaviour
         currentPatch = new GameObject("CoonPatch");
         MeshFilter meshFilter = currentPatch.AddComponent<MeshFilter>();
         MeshRenderer meshRenderer = currentPatch.AddComponent<MeshRenderer>();
+        MeshCollider meshCollider = currentPatch.AddComponent<MeshCollider>();
 
         if (patchMaterial != null)
             meshRenderer.material = patchMaterial;

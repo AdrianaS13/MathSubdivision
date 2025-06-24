@@ -355,6 +355,7 @@
 "Assets/Scripts/ChaikinCurve.cs"
 "Assets/Scripts/CoonPatch/CoonPatchGenerator.cs"
 "Assets/Scripts/CoonPatch/CurveCreator.cs"
+"Assets/Scripts/Loop/LoopSubdivision.cs"
 "Assets/Scripts/Polyline.cs"
 -langversion:9.0
 

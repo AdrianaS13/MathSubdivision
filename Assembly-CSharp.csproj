@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\CoonPatch\CoonPatchGenerator.cs" />
     <Compile Include="Assets\Scripts\CoonPatch\CurveCreator.cs" />
+    <Compile Include="Assets\Scripts\Loop\LoopSubdivision.cs" />
     <Compile Include="Assets\Scripts\Polyline.cs" />
     <Compile Include="Assets\Scripts\ChaikinCurve.cs" />
   </ItemGroup>
