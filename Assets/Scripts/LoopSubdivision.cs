@@ -130,6 +130,7 @@ public class LoopSubdivision : MonoBehaviour
     {
         Vector3[] vertices = mesh.vertices;
         int[] triangles = mesh.triangles;
+        Vector2[] uvs = mesh.uv; 
 
         List<Vertex> vertexList = new List<Vertex>();
         for (int i = 0; i < vertices.Length; i++)
@@ -167,7 +168,7 @@ public class LoopSubdivision : MonoBehaviour
         }
 
         // Step 3: Generate new mesh
-        return GenerateSubdividedMesh(vertexList, edgeDict, triangles);
+        return GenerateSubdividedMesh(vertexList, edgeDict, triangles, uvs);
     }
 
     void AddAdjacency(List<Vertex> vertices, int v1, int v2)
@@ -261,16 +262,22 @@ public class LoopSubdivision : MonoBehaviour
         return (1.0f - n * alpha) * vertex.position + alpha * adjacentSum;
     }
 
-    Mesh GenerateSubdividedMesh(List<Vertex> vertices, Dictionary<Edge, Edge> edges, int[] originalTriangles)
+    Mesh GenerateSubdividedMesh(List<Vertex> vertices, Dictionary<Edge, Edge> edges, int[] originalTriangles, Vector2[] originalUVs)
     {
         Mesh newMesh = new Mesh();
 
         List<Vector3> newVertices = new List<Vector3>();
         List<int> newTriangles = new List<int>();
+        List<Vector2> newUVs = new List<Vector2>();
 
         foreach (var vertex in vertices)
         {
             newVertices.Add(vertex.newPosition);
+        }
+
+        for (int i = 0; i < originalUVs.Length; i++)
+        {
+            newUVs.Add(originalUVs[i]);
         }
 
         // Add edge vertices
@@ -279,6 +286,12 @@ public class LoopSubdivision : MonoBehaviour
         {
             edgeToNewVertexIndex[edge] = newVertices.Count;
             newVertices.Add(edge.newPoint);
+
+            // Interpolate UV coordinates for edge points
+            Vector2 uv1 = originalUVs[edge.vertex1];
+            Vector2 uv2 = originalUVs[edge.vertex2];
+            Vector2 interpolatedUV = (uv1 + uv2) * 0.5f;
+            newUVs.Add(interpolatedUV);
         }
 
         // Generate new triangles
@@ -302,6 +315,7 @@ public class LoopSubdivision : MonoBehaviour
 
         newMesh.vertices = newVertices.ToArray();
         newMesh.triangles = newTriangles.ToArray();
+        newMesh.uv = newUVs.ToArray();
         newMesh.RecalculateNormals();
         newMesh.RecalculateBounds();
 

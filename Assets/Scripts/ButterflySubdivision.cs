@@ -115,6 +115,7 @@ public class ButterflySubdivision : MonoBehaviour
     {
         Vector3[] vertices = mesh.vertices;
         int[] triangles = mesh.triangles;
+        Vector2[] uvs = mesh.uv;
 
         Debug.Log($"Starting Butterfly subdivision on mesh with {vertices.Length} vertices, {triangles.Length / 3} triangles");
 
@@ -139,7 +140,7 @@ public class ButterflySubdivision : MonoBehaviour
         }
 
         // Generate subdivided mesh
-        return GenerateSubdividedMesh(vertices, faces, halfEdgeMap);
+        return GenerateSubdividedMesh(vertices, faces, halfEdgeMap, uvs);
     }
 
     void BuildHalfEdgeStructure(Vector3[] vertices, int[] triangles, List<Face> faces, Dictionary<(int, int), HalfEdge> halfEdgeMap)
@@ -361,15 +362,21 @@ public class ButterflySubdivision : MonoBehaviour
         return wings;
     }
 
-    Mesh GenerateSubdividedMesh(Vector3[] originalVertices, List<Face> faces, Dictionary<(int, int), HalfEdge> halfEdgeMap)
+    Mesh GenerateSubdividedMesh(Vector3[] originalVertices, List<Face> faces, Dictionary<(int, int), HalfEdge> halfEdgeMap, Vector2[] originalUVs)
     {
         Mesh newMesh = new Mesh();
 
         List<Vector3> newVertices = new List<Vector3>();
         List<int> newTriangles = new List<int>();
+        List<Vector2> newUVs = new List<Vector2>();
 
         // Add original vertices (unchanged in interpolatory scheme)
         newVertices.AddRange(originalVertices);
+
+        for (int i = 0; i < originalUVs.Length; i++)
+        {
+            newUVs.Add(originalUVs[i]);
+        }
 
         // Add edge vertices and create mapping
         Dictionary<(int, int), int> edgeToVertexIndex = new Dictionary<(int, int), int>();
@@ -385,7 +392,14 @@ public class ButterflySubdivision : MonoBehaviour
             {
                 edgeToVertexIndex[edgeKey] = newVertices.Count;
                 newVertices.Add(halfEdge.newPoint);
+
+                //interpolate uv for edge points
+                Vector2 uv1 = originalUVs[from];
+                Vector2 uv2 = originalUVs[to];
+                Vector2 interpolatedUV = (uv1 + uv2) * 0.5f;
+                newUVs.Add(interpolatedUV);
             }
+
         }
 
         // Generate new triangles (1-to-4 subdivision)
@@ -415,6 +429,7 @@ public class ButterflySubdivision : MonoBehaviour
 
         newMesh.vertices = newVertices.ToArray();
         newMesh.triangles = newTriangles.ToArray();
+        newMesh.uv = newUVs.ToArray();
         newMesh.RecalculateNormals();
         newMesh.RecalculateBounds();
 
