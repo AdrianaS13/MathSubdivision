@@ -354,12 +354,15 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.10f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/Scripts/ButterflySubdivision.cs"
 "Assets/Scripts/CameraMovement.cs"
+"Assets/Scripts/CatmullClarkSubdivision.cs"
 "Assets/Scripts/ChaikinCurve.cs"
 "Assets/Scripts/CoonPatchGenerator.cs"
 "Assets/Scripts/CurveManager.cs"
 "Assets/Scripts/LoopSubdivision.cs"
 "Assets/Scripts/Polyline.cs"
+"Assets/Scripts/SqrtKobbeltSubdivision.cs"
 "Assets/Scripts/UIManager.cs"
+"Assets/Scripts/UISubdivision.cs"
 -langversion:9.0
 
 /deterministic

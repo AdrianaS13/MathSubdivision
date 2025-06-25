@@ -64,8 +64,11 @@
     <Compile Include="Assets\Scripts\CurveManager.cs" />
     <Compile Include="Assets\Scripts\ButterflySubdivision.cs" />
     <Compile Include="Assets\Scripts\Polyline.cs" />
+    <Compile Include="Assets\Scripts\UISubdivision.cs" />
     <Compile Include="Assets\Scripts\UIManager.cs" />
     <Compile Include="Assets\Scripts\ChaikinCurve.cs" />
+    <Compile Include="Assets\Scripts\SqrtKobbeltSubdivision.cs" />
+    <Compile Include="Assets\Scripts\CatmullClarkSubdivision.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -331,6 +331,34 @@ public class CoonPatchGenerator : MonoBehaviour
         return Vector3.Lerp(curve[index], curve[index + 1], fraction);
     }
 
+    void OnDrawGizmos()
+    {
+        if (currentPatch != null)
+        {
+            MeshFilter meshFilter = currentPatch.GetComponent<MeshFilter>();
+            if (meshFilter?.mesh != null)
+            {
+                Mesh mesh = meshFilter.mesh;
+                Vector3[] vertices = mesh.vertices;
+                int[] triangles = mesh.triangles;
+
+                Gizmos.color = Color.black;
+
+                // Draw triangle edges
+                for (int i = 0; i < triangles.Length; i += 3)
+                {
+                    Vector3 v1 = currentPatch.transform.TransformPoint(vertices[triangles[i]]);
+                    Vector3 v2 = currentPatch.transform.TransformPoint(vertices[triangles[i + 1]]);
+                    Vector3 v3 = currentPatch.transform.TransformPoint(vertices[triangles[i + 2]]);
+
+                    Gizmos.DrawLine(v1, v2);
+                    Gizmos.DrawLine(v2, v3);
+                    Gizmos.DrawLine(v3, v1);
+                }
+            }
+        }
+    }
+
     void OnGUI()
     {
         if (!showDebugInfo) return;
