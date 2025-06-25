@@ -20,6 +20,8 @@ public class UIManager : MonoBehaviour
     private float v = 1f / 4f;
     private int iter = 1;
 
+
+    
     private void Awake()
     {
         if (Instance == null)
@@ -41,6 +43,9 @@ public class UIManager : MonoBehaviour
         generateButton.onClick.AddListener(OnGenerateClicked);
 
         UpdateUIText();
+
+
+        
     }
 
     public void SetActiveChaikinCurve(ChaikinCurve chaikinCurve)
@@ -104,4 +109,5 @@ public class UIManager : MonoBehaviour
             activeChaikinCurve.GenerateChaikinCurve();
         }
     }
+
 }

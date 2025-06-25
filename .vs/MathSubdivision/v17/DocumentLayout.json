@@ -3,20 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\assets\\scripts\\polyline.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\assets\\scripts\\uisubdivision.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\uisubdivision.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\assets\\scripts\\sqrtkobbeltsubdivision.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\sqrtkobbeltsubdivision.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\assets\\scripts\\catmullclarksubdivision.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\catmullclarksubdivision.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|c:\\users\\adria\\documents\\adriana\\esgi\\5\\semestre2\\math\\mathsubdivision\\assets\\scripts\\polyline.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\polyline.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|c:\\users\\adria\\documents\\adriana\\esgi\\5\\semestre2\\math\\mathsubdivision\\assets\\scripts\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\assets\\scripts\\chaikincurve.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\chaikincurve.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\assets\\scripts\\curvemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|c:\\users\\adria\\documents\\adriana\\esgi\\5\\semestre2\\math\\mathsubdivision\\assets\\scripts\\curvemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\curvemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\assets\\scripts\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,53 +42,80 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UIManager.cs",
-              "DocumentMoniker": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\UIManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\UIManager.cs",
-              "ToolTip": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\UIManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\UIManager.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAvAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-24T09:49:53.823Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "CurveManager.cs",
-              "DocumentMoniker": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\CurveManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\CurveManager.cs",
-              "ToolTip": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\CurveManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\CurveManager.cs",
-              "ViewState": "AQIAALoAAAAAAAAAAADgv9AAAAAwAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-23T15:13:37.544Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ChaikinCurve.cs",
-              "DocumentMoniker": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\ChaikinCurve.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\ChaikinCurve.cs",
-              "ToolTip": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\ChaikinCurve.cs",
-              "RelativeToolTip": "Assets\\Scripts\\ChaikinCurve.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAZAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-23T09:22:38.24Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
               "Title": "Polyline.cs",
               "DocumentMoniker": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\Polyline.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Polyline.cs",
               "ToolTip": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\Polyline.cs",
               "RelativeToolTip": "Assets\\Scripts\\Polyline.cs",
-              "ViewState": "AQIAABwAAAAAAAAAAAAQwDEAAAAJAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-23T09:02:55.78Z",
+              "WhenOpened": "2025-06-25T10:48:40.885Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SqrtKobbeltSubdivision.cs",
+              "DocumentMoniker": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\SqrtKobbeltSubdivision.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\SqrtKobbeltSubdivision.cs",
+              "ToolTip": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\SqrtKobbeltSubdivision.cs",
+              "RelativeToolTip": "Assets\\Scripts\\SqrtKobbeltSubdivision.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-25T09:47:06.346Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CatmullClarkSubdivision.cs",
+              "DocumentMoniker": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\CatmullClarkSubdivision.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\CatmullClarkSubdivision.cs",
+              "ToolTip": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\CatmullClarkSubdivision.cs",
+              "RelativeToolTip": "Assets\\Scripts\\CatmullClarkSubdivision.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T14:47:18.346Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UISubdivision.cs",
+              "DocumentMoniker": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\UISubdivision.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\UISubdivision.cs",
+              "ToolTip": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\UISubdivision.cs",
+              "RelativeToolTip": "Assets\\Scripts\\UISubdivision.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABwAAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-25T08:17:57.549Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CurveManager.cs",
+              "DocumentMoniker": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\CurveManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\CurveManager.cs",
+              "ToolTip": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\CurveManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\CurveManager.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-25T10:48:23.473Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UIManager.cs",
+              "DocumentMoniker": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\UIManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\UIManager.cs",
+              "ToolTip": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\UIManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\UIManager.cs",
+              "ViewState": "AQIAAFgAAAAAAAAAAAAkwG8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T15:05:47.65Z"
             }
           ]
         }
