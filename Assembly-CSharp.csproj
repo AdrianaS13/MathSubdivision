@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\CoonPatchGenerator.cs" />
     <Compile Include="Assets\Scripts\LoopSubdivision.cs" />
+    <Compile Include="Assets\Scripts\CameraMovement.cs" />
     <Compile Include="Assets\Scripts\CurveManager.cs" />
     <Compile Include="Assets\Scripts\ButterflySubdivision.cs" />
     <Compile Include="Assets\Scripts\Polyline.cs" />

@@ -16,9 +16,8 @@ public class CoonPatchGenerator : MonoBehaviour
 
     private GameObject currentPatch;
 
-    // Boundary curves following course notation
-    private Vector3[] C1, C2; // Opposite curves (u direction)
-    private Vector3[] d1, d2; // Opposite curves (v direction)
+    private Vector3[] C1, C2; // direction u
+    private Vector3[] d1, d2; // direction v
 
     void Update()
     {
@@ -48,7 +47,6 @@ public class CoonPatchGenerator : MonoBehaviour
                 return;
             }
 
-            // Try to get LineRenderer from the hit ChaikinCurve object
             LineRenderer lr = hit.collider.GetComponent<LineRenderer>();
             ChaikinCurve chaikinCurve = hit.collider.GetComponent<ChaikinCurve>();
 
@@ -128,9 +126,8 @@ public class CoonPatchGenerator : MonoBehaviour
     {
         var curves = selectedCurves.Select(GetCurvePoints).ToArray();
 
-        // Find curve connections by checking endpoints
         List<CurveConnection> connections = new List<CurveConnection>();
-        float tolerance = 0.5f; // Increased tolerance
+        float tolerance = 0.5f; 
 
         for (int i = 0; i < 4; i++)
         {
@@ -139,7 +136,6 @@ public class CoonPatchGenerator : MonoBehaviour
                 var curve1 = curves[i];
                 var curve2 = curves[j];
 
-                // Check all possible endpoint connections
                 if (Vector3.Distance(curve1[0], curve2[0]) < tolerance)
                     connections.Add(new CurveConnection(i, j, 0, 0));
                 else if (Vector3.Distance(curve1[0], curve2[curve2.Length - 1]) < tolerance)
@@ -159,10 +155,10 @@ public class CoonPatchGenerator : MonoBehaviour
 
         // Order curves properly - find a starting curve and follow the loop
         List<int> orderedIndices = new List<int>();
-        orderedIndices.Add(0); // Start with first curve
+        orderedIndices.Add(0); 
 
         int currentCurve = 0;
-        int currentEnd = 1; // Start from end of first curve
+        int currentEnd = 1;
 
         for (int step = 0; step < 3; step++)
         {
@@ -182,19 +178,18 @@ public class CoonPatchGenerator : MonoBehaviour
             else
             {
                 currentCurve = connection.curve1;
-                currentEnd = 1 - connection.end1; // Use opposite end
+                currentEnd = 1 - connection.end1;
             }
 
             orderedIndices.Add(currentCurve);
         }
 
-        // Assign curves in proper order
-        C1 = curves[orderedIndices[0]]; // Bottom
-        d2 = curves[orderedIndices[1]]; // Right  
-        C2 = curves[orderedIndices[2]]; // Top
-        d1 = curves[orderedIndices[3]]; // Left
+        C1 = curves[orderedIndices[0]]; //bas
+        d2 = curves[orderedIndices[1]]; //droite  
+        C2 = curves[orderedIndices[2]]; //haut
+        d1 = curves[orderedIndices[3]]; //gauche
 
-        // Reverse C2 and d1 to match parameter directions
+        
         C2 = ReverseArray(C2);
         d1 = ReverseArray(d1);
 
@@ -256,7 +251,7 @@ public class CoonPatchGenerator : MonoBehaviour
                 float u = (float)i / patchResolution;
                 float v = (float)j / patchResolution;
 
-                // Following course formula: S(u,v) = rc(u,v) + rd(u,v) - rcd(u,v)
+                //S(u,v) = rc(u,v) + rd(u,v) - rcd(u,v)
                 Vector3 point = CalculateCoonPatch(u, v);
                 vertices.Add(point);
                 uvs.Add(new Vector2(u, v));
@@ -287,36 +282,29 @@ public class CoonPatchGenerator : MonoBehaviour
 
     Vector3 CalculateCoonPatch(float u, float v)
     {
-        // Basic linear blending functions from course: f1(u) = 1-u, f2(u) = u
-        float f1_u = 1 - u;  // f1(u) = 1-u
-        float f2_u = u;      // f2(u) = u
-        float g1_v = 1 - v;  // g1(v) = 1-v  
-        float g2_v = v;      // g2(v) = v
+        float f1_u = 1 - u;
+        float f2_u = u;     
+        float g1_v = 1 - v;
+        float g2_v = v;
 
-        // Sample boundary curves at parameter values
-        Vector3 C1_u = SampleCurve(C1, u);     // Bottom curve S(u,0)
-        Vector3 C2_u = SampleCurve(C2, u);     // Top curve S(u,1)
-        Vector3 d1_v = SampleCurve(d1, v);     // Left curve S(0,v)
-        Vector3 d2_v = SampleCurve(d2, v);     // Right curve S(1,v)
+        Vector3 C1_u = SampleCurve(C1, u); // Point on bottom boundary at position u
+        Vector3 C2_u = SampleCurve(C2, u); // Point on top boundary at position u  
+        Vector3 d1_v = SampleCurve(d1, v); // Point on left boundary at position v
+        Vector3 d2_v = SampleCurve(d2, v); // Point on right boundary at position v
 
-        // Corner points - make sure these are consistent
-        Vector3 S00 = SampleCurve(C1, 0);      // S(0,0) - bottom-left
-        Vector3 S10 = SampleCurve(C1, 1);      // S(1,0) - bottom-right
-        Vector3 S01 = SampleCurve(C2, 0);      // S(0,1) - top-left
-        Vector3 S11 = SampleCurve(C2, 1);      // S(1,1) - top-right
+        // Corner points, 0=start, 1=end
+        Vector3 S00 = SampleCurve(C1, 0); //bottom-left 
+        Vector3 S10 = SampleCurve(C1, 1); //bottom-right
+        Vector3 S01 = SampleCurve(C2, 0); //top-left
+        Vector3 S11 = SampleCurve(C2, 1); //top-right
 
-        // Following course formula:
-        // rc(u,v): ruled surface interpolating C1, C2 (u-direction)
         Vector3 rc = g1_v * C1_u + g2_v * C2_u;
 
-        // rd(u,v): ruled surface interpolating d1, d2 (v-direction)
         Vector3 rd = f1_u * d1_v + f2_u * d2_v;
 
-        // rcd(u,v): bilinear surface from corner points
         Vector3 rcd = f1_u * g1_v * S00 + f2_u * g1_v * S10 +
                       f1_u * g2_v * S01 + f2_u * g2_v * S11;
 
-        // Final Coon patch: S(u,v) = rc(u,v) + rd(u,v) - rcd(u,v)
         return rc + rd - rcd;
     }
 

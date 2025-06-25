@@ -25,7 +25,6 @@ public class Polyline : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.useWorldSpace = true;
 
-        //lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
         lineRenderer.material = new Material(Shader.Find("Unlit/Color"));
         lineRenderer.material.color = Color.green;
         lineRenderer.startWidth = 0.05f;
@@ -52,14 +51,73 @@ public class Polyline : MonoBehaviour
         }
     }
 
+    public int GetClickedPointIndex(float radiusPixels = 50f)
+    {
+        Vector3 mousePos = Input.mousePosition;
+
+        for (int i = 0; i < points.Count; i++)
+        {
+            Vector3 screenPos = mainCamera.WorldToScreenPoint(points[i]);
+
+            if (screenPos.z > 0)
+            {
+                float screenDistance = Vector2.Distance(
+                    new Vector2(mousePos.x, mousePos.y),
+                    new Vector2(screenPos.x, screenPos.y)
+                );
+
+                if (screenDistance < radiusPixels)
+                {
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+
+    public bool IsMouseOverPoint(out int pointIndex, float radiusPixels = 50f)
+    {
+        pointIndex = GetClickedPointIndex(radiusPixels);
+        return pointIndex != -1;
+    }
+
+    public int GetClickedPointIndex(Vector3 worldPos, float radius = 2f)
+    {
+        for (int i = 0; i < points.Count; i++)
+        {
+            if (Vector3.Distance(worldPos, points[i]) < radius)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public Vector3 GetPointWorldPosition(int index)
+    {
+        if (index >= 0 && index < points.Count)
+            return points[index];
+        return Vector3.zero;
+    }
 
     void AddPointFromMouseClick()
     {
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = Mathf.Abs(mainCamera.transform.position.z - zDepth);
-        Vector3 worldPos = mainCamera.ScreenToWorldPoint(mousePos);
-        worldPos.z = zDepth;
+        // First check if we're clicking on an existing point (using screen space detection)
+        if (IsMouseOverPoint(out int clickedPointIndex, 50f)) // 50 pixels radius
+        {
+            Debug.Log($"Clicked on existing point {clickedPointIndex} at position {points[clickedPointIndex]}");
+            return;
+        }
 
+        // Create the ray from mouse position
+        Vector3 mousePos = Input.mousePosition;
+        Ray ray = mainCamera.ScreenPointToRay(mousePos);
+
+        // Place point at fixed distance from camera
+        float distanceFromCamera = 10f; 
+        Vector3 worldPos = ray.GetPoint(distanceFromCamera);
+
+        // Add the point
         points.Add(worldPos);
         UpdateLineRenderer();
 
@@ -68,12 +126,38 @@ public class Polyline : MonoBehaviour
             GameObject point = Instantiate(pointPrefab, worldPos, Quaternion.identity, transform);
             pointObjects.Add(point);
         }
+
         if (chaikinCurve != null)
         {
-            chaikinCurve.GenerateChaikinCurve(); // Actualiza automáticamente
+            chaikinCurve.GenerateChaikinCurve();
         }
+    }
 
+    //to place points on an invisible ground plane:
+    void AddPointFromMouseClickOnGround()
+    {
+        Vector3 mousePos = Input.mousePosition;
+        Ray ray = mainCamera.ScreenPointToRay(mousePos);
 
+        // Cast ray and hit anything on the default layer (like a ground plane)
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            Vector3 worldPos = hit.point;
+
+            points.Add(worldPos);
+            UpdateLineRenderer();
+
+            if (pointPrefab != null)
+            {
+                GameObject point = Instantiate(pointPrefab, worldPos, Quaternion.identity, transform);
+                pointObjects.Add(point);
+            }
+
+            if (chaikinCurve != null)
+            {
+                chaikinCurve.GenerateChaikinCurve();
+            }
+        }
     }
 
     void UpdateLineRenderer()
@@ -99,17 +183,6 @@ public class Polyline : MonoBehaviour
         return points;
     }
 
-    public int GetClickedPointIndex(Vector3 mousePos, float radius = 0.2f)
-    {
-        for (int i = 0; i < points.Count; i++)
-        {
-            if (Vector3.Distance(mousePos, points[i]) < radius)
-            {
-                return i;
-            }
-        }
-        return -1;
-    }
 
     public void AddInitialPoint(Vector3 point)
     {

@@ -315,7 +315,6 @@ public class ButterflySubdivision : MonoBehaviour
         List<Vector3> wings = new List<Vector3>();
 
         // Find triangles adjacent to the opposite vertices that form the wings
-        // This is a simplified approach - for a full implementation, we'd need more complex topology traversal
 
         HashSet<int> usedVertices = new HashSet<int> { edgeStart, edgeEnd, opposite1, opposite2 };
 

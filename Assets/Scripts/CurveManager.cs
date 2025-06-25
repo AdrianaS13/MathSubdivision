@@ -66,7 +66,7 @@ public class CurveManager : MonoBehaviour
     {
         foreach (var pair in allCurves)
         {
-            int index = pair.polyline.GetClickedPointIndex(mouseWorld);
+            int index = pair.polyline.GetClickedPointIndex();
             if (index >= 0)
             {
                 Vector3 p = pair.polyline.GetPoints()[index];
@@ -81,7 +81,7 @@ public class CurveManager : MonoBehaviour
     {
         foreach (var pair in allCurves)
         {
-            int index = pair.polyline.GetClickedPointIndex(mouseWorld);
+            int index = pair.polyline.GetClickedPointIndex();
             if (index >= 0)
             {
                 Vector3 p = pair.polyline.GetPoints()[index];

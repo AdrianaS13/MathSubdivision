@@ -199,11 +199,10 @@ public class LoopSubdivision : MonoBehaviour
 
         if (edge.adjacentTriangles.Count != 2)
         {
-            // Boundary edge - simple midpoint
             return (v1 + v2) * 0.5f;
         }
 
-        // Find the two opposite vertices (vleft and vright)
+        // Find vleft and vright
         Vector3 vleft = Vector3.zero, vright = Vector3.zero;
         bool foundLeft = false;
 
@@ -229,7 +228,7 @@ public class LoopSubdivision : MonoBehaviour
             }
         }
 
-        // Loop's edge point formula: e = (3/8)(v1 + v2) + (1/8)(vleft + vright)
+        //e = (3/8)(v1 + v2) + (1/8)(vleft + vright)
         return (3.0f / 8.0f) * (v1 + v2) + (1.0f / 8.0f) * (vleft + vright);
     }
 
@@ -239,7 +238,6 @@ public class LoopSubdivision : MonoBehaviour
 
         if (n == 0) return vertex.position;
 
-        // Compute alpha based on valency (from course material)
         float alpha;
         if (n == 3)
         {
@@ -253,14 +251,13 @@ public class LoopSubdivision : MonoBehaviour
             alpha = (1.0f / n) * (5.0f / 8.0f - term * term);
         }
 
-        // Compute sum of adjacent vertices
         Vector3 adjacentSum = Vector3.zero;
         foreach (int adjIndex in vertex.adjacentVertices)
         {
             adjacentSum += allVertices[adjIndex].position;
         }
 
-        // Loop's vertex formula: v' = (1 - n.alpha)v + alpha * sum(adjacent vertices)
+        //v' = (1 - n.alpha)v + alpha * sum(adjacent vertices)
         return (1.0f - n * alpha) * vertex.position + alpha * adjacentSum;
     }
 
@@ -271,7 +268,6 @@ public class LoopSubdivision : MonoBehaviour
         List<Vector3> newVertices = new List<Vector3>();
         List<int> newTriangles = new List<int>();
 
-        // Add original vertices (with new positions)
         foreach (var vertex in vertices)
         {
             newVertices.Add(vertex.newPosition);
@@ -285,7 +281,7 @@ public class LoopSubdivision : MonoBehaviour
             newVertices.Add(edge.newPoint);
         }
 
-        // Generate new triangles (1-to-4 subdivision)
+        // Generate new triangles
         for (int i = 0; i < originalTriangles.Length; i += 3)
         {
             int v1 = originalTriangles[i];
@@ -293,18 +289,15 @@ public class LoopSubdivision : MonoBehaviour
             int v3 = originalTriangles[i + 2];
 
             // Get edge vertex indices
-            int e1 = edgeToNewVertexIndex[new Edge(v2, v3)]; // opposite to v1
-            int e2 = edgeToNewVertexIndex[new Edge(v3, v1)]; // opposite to v2
-            int e3 = edgeToNewVertexIndex[new Edge(v1, v2)]; // opposite to v3
+            int e1 = edgeToNewVertexIndex[new Edge(v2, v3)]; //opposé à v1
+            int e2 = edgeToNewVertexIndex[new Edge(v3, v1)]; //opposé à v2
+            int e3 = edgeToNewVertexIndex[new Edge(v1, v2)]; //opposé à v3
 
-            // Create 4 new triangles
-            // Corner triangles
+            //créer les 4 triangles
             AddTriangle(newTriangles, v1, e3, e2);
             AddTriangle(newTriangles, v2, e1, e3);
             AddTriangle(newTriangles, v3, e2, e1);
-
-            // Center triangle
-            AddTriangle(newTriangles, e1, e2, e3);
+            AddTriangle(newTriangles, e1, e2, e3); //triangle au centre
         }
 
         newMesh.vertices = newVertices.ToArray();
