@@ -28,24 +28,6 @@ public class SqrtKobbeltSubdivision : MonoBehaviour
         }
     }
 
-    private class Edge
-    {
-        public int v1, v2;
-        public List<int> adjacentFaceIndices = new List<int>();
-
-        public Edge(int a, int b, int faceIndex)
-        {
-            v1 = Mathf.Min(a, b);
-            v2 = Mathf.Max(a, b);
-            adjacentFaceIndices.Add(faceIndex);
-        }
-
-        public bool Matches(int a, int b)
-        {
-            return v1 == Mathf.Min(a, b) && v2 == Mathf.Max(a, b);
-        }
-    }
-
     void Start()
     {
         meshFilter = GetComponent<MeshFilter>() ?? gameObject.AddComponent<MeshFilter>();
@@ -92,12 +74,6 @@ public class SqrtKobbeltSubdivision : MonoBehaviour
         return new MeshData(v, f);
     }
 
-    // Función auxiliar para verificar orientación de triángulo
-    bool IsTriangleCounterClockwise(Vector3 a, Vector3 b, Vector3 c, Vector3 viewDir)
-    {
-        Vector3 normal = Vector3.Cross(b - a, c - a);
-        return Vector3.Dot(normal, viewDir) > 0;
-    }
 
     // Función para determinar la orientación correcta de un triángulo flip
     void CreateFlipTriangles(List<List<int>> finalFaces, List<Vector3> vertices, int c1, int c2, int v1, int v2, List<int> face1, List<int> face2)
@@ -106,18 +82,10 @@ public class SqrtKobbeltSubdivision : MonoBehaviour
         Vector3 normal1 = Vector3.Cross(vertices[face1[1]] - vertices[face1[0]], vertices[face1[2]] - vertices[face1[0]]).normalized;
         Vector3 normal2 = Vector3.Cross(vertices[face2[1]] - vertices[face2[0]], vertices[face2[2]] - vertices[face2[0]]).normalized;
 
-        // Punto medio de la arista compartida
-        Vector3 edgeMidpoint = (vertices[v1] + vertices[v2]) * 0.5f;
-        Vector3 center1Pos = vertices[c1];
-        Vector3 center2Pos = vertices[c2];
-
-        // Vector desde el punto medio hacia cada centro
-        Vector3 toCenter1 = (center1Pos - edgeMidpoint).normalized;
-        Vector3 toCenter2 = (center2Pos - edgeMidpoint).normalized;
 
         // Determinar orientación basada en las normales originales
         // Primer triángulo: c1, v1, c2 o c1, c2, v1
-        Vector3 testNormal1 = Vector3.Cross(vertices[v1] - center1Pos, center2Pos - center1Pos);
+        Vector3 testNormal1 = Vector3.Cross(vertices[v1] - vertices[c1], vertices[c2] - vertices[c1]);
         bool useFirstOrder = Vector3.Dot(testNormal1, normal1) > 0 || Vector3.Dot(testNormal1, normal2) > 0;
 
         if (useFirstOrder)
@@ -139,67 +107,119 @@ public class SqrtKobbeltSubdivision : MonoBehaviour
 
         var newVerts = new List<Vector3>(oldVerts);
         var faceCenters = new List<int>();
-        var edgeList = new List<Edge>();
-        var debugCentersTemp = new List<Vector3>();
 
-        // Étape 1 : calculer les centres de chaque triangle
+        // Paso 1: calcular centro de cada triángulo y añadirlo
         for (int i = 0; i < oldFaces.Count; i++)
         {
             var f = oldFaces[i];
             Vector3 center = (oldVerts[f[0]] + oldVerts[f[1]] + oldVerts[f[2]]) / 3f;
             newVerts.Add(center);
             faceCenters.Add(newVerts.Count - 1);
-            debugCentersTemp.Add(center);
         }
 
-        // Étape 2 : construire la liste des arêtes
+        // Paso 2: crear la subdivisión inicial - 3 triángulos por cada triángulo original
+        var subdividedFaces = new List<List<int>>();
         for (int i = 0; i < oldFaces.Count; i++)
         {
-            var face = oldFaces[i];
-            for (int j = 0; j < 3; j++)
+            var f = oldFaces[i];
+            int c = faceCenters[i];
+            subdividedFaces.Add(new List<int> { f[0], f[1], c });
+            subdividedFaces.Add(new List<int> { f[1], f[2], c });
+            subdividedFaces.Add(new List<int> { f[2], f[0], c });
+        }
+
+        // Paso 3: construir lista de aristas y caras adyacentes (en la malla original)
+        var edgeList = new List<int[]>();
+        var edgeFaces = new List<List<int>>();
+
+        for (int f = 0; f < oldFaces.Count; f++)
+        {
+            var face = oldFaces[f];
+            for (int i = 0; i < 3; i++)
             {
-                int a = face[j];
-                int b = face[(j + 1) % 3];
-                bool found = false;
-                foreach (var edge in edgeList)
+                int a = face[i];
+                int b = face[(i + 1) % 3]; // siguiente vértice de la cara (cerrando el triángulo)
+
+                // Ordenar la arista para evitar duplicados: (menor, mayor)
+                int v1 = Mathf.Min(a, b);
+                int v2 = Mathf.Max(a, b);
+
+                bool exists = false;
+                for (int e = 0; e < edgeList.Count; e++)
                 {
-                    if (edge.Matches(a, b))
+                    int[] edge = edgeList[e];
+                    if (edge[0] == v1 && edge[1] == v2)
                     {
-                        edge.adjacentFaceIndices.Add(i);
-                        found = true;
+                        edgeFaces[e].Add(f);
+                        exists = true;
                         break;
                     }
                 }
-                if (!found)
-                    edgeList.Add(new Edge(a, b, i));
+
+                // Si no existe, la añadimos
+                if (!exists)
+                {
+                    edgeList.Add(new int[] { v1, v2 });
+                    edgeFaces.Add(new List<int> { f });
+                }
             }
         }
+
+
+        // Paso 4: construir la malla final con flipping:
+        // - eliminar triángulos subdivididos que contienen aristas originales (se hace filtrando)
+        // - añadir triángulos de flipping (entre centros y vértices originales)
 
         var finalFaces = new List<List<int>>();
-        var flipLines = new List<(Vector3, Vector3)>();
 
-        // Étape 3 : ajouter les faces de flip (centres connectés) con orientación correcta
-        foreach (var edge in edgeList)
+        bool ContainsOriginalEdge(List<int> tri)
         {
-            if (edge.adjacentFaceIndices.Count == 2)
+            for (int k = 0; k < 3; k++)
             {
-                int f1 = edge.adjacentFaceIndices[0];
-                int f2 = edge.adjacentFaceIndices[1];
+                int v0 = tri[k];
+                int v1 = tri[(k + 1) % 3];
+                int minV = Mathf.Min(v0, v1);
+                int maxV = Mathf.Max(v0, v1);
+
+                for (int e = 0; e < edgeList.Count; e++)
+                {
+                    if (edgeList[e][0] == minV && edgeList[e][1] == maxV)
+                    {
+                        return edgeFaces[e].Count == 2; // solo si tiene dos caras se puede flippear
+                    }
+                }
+            }
+            return false;
+        }
+
+
+        // Añadir triángulos subdivididos que NO contienen aristas originales (no se eliminan)
+        foreach (var tri in subdividedFaces)
+        {
+            if (!ContainsOriginalEdge(tri))
+                finalFaces.Add(tri);
+        }
+
+        // Paso 5: añadir triángulos de flipping
+        for (int e = 0; e < edgeList.Count; e++)
+        {
+            if (edgeFaces[e].Count == 2)
+            {
+                int[] edge = edgeList[e];
+                int v1 = edge[0];
+                int v2 = edge[1];
+                int f1 = edgeFaces[e][0];
+                int f2 = edgeFaces[e][1];
+
                 int c1 = faceCenters[f1];
                 int c2 = faceCenters[f2];
-                int v1 = edge.v1;
-                int v2 = edge.v2;
 
                 CreateFlipTriangles(finalFaces, newVerts, c1, c2, v1, v2, oldFaces[f1], oldFaces[f2]);
-
-                flipLines.Add((newVerts[c1], newVerts[c2]));
             }
         }
 
-        // Étape 4 : ajouter les 3 nouveaux triangles par triangle original
-        
 
-        // Étape 5 : lissage des sommets originaux
+        // Paso 6: suavizar vértices originales
         var vertexNeighbors = new List<List<int>>();
         for (int i = 0; i < oldVerts.Count; i++)
             vertexNeighbors.Add(new List<int>());
@@ -226,14 +246,12 @@ public class SqrtKobbeltSubdivision : MonoBehaviour
             newVerts[i] = (1 - alpha) * oldVerts[i] + alpha * avg;
         }
 
-        // Débogage visuel
         debugVertices = newVerts;
         debugFaces = finalFaces;
-        debugCenters = debugCentersTemp;
-        debugFlipConnections = flipLines;
 
         return new MeshData(newVerts, finalFaces);
     }
+
 
     Mesh ToUnityMesh(MeshData mesh)
     {

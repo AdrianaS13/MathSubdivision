@@ -108,14 +108,14 @@ public class CatmullClarkSubdivision : MonoBehaviour
         var edgeList = new List<int[]>();         // [v1, v2]
         var edgeFaces = new List<List<int>>();    // cada arista lista de caras que la comparten
         var edgePoints = new List<Vector3>();
-
+        // Detectar aristas
         for (int f = 0; f < inputMesh.faces.Count; f++)
         {
             var face = inputMesh.faces[f];
             for (int i = 0; i < face.Count; i++)
             {
                 int a = face[i];
-                int b = face[(i + 1) % face.Count];
+                int b = face[(i + 1) % face.Count];//cierra la cara
 
                 bool exists = false;
                 for (int e = 0; e < edgeList.Count; e++)
@@ -123,12 +123,12 @@ public class CatmullClarkSubdivision : MonoBehaviour
                     var edge = edgeList[e];
                     if ((edge[0] == a && edge[1] == b) || (edge[0] == b && edge[1] == a))
                     {
-                        edgeFaces[e].Add(f);
+                        edgeFaces[e].Add(f);//guarda cara adyacente
                         exists = true;
                         break;
                     }
                 }
-
+                //guarda aristas y caras nuevas
                 if (!exists)
                 {
                     edgeList.Add(new int[] { a, b });
@@ -136,17 +136,17 @@ public class CatmullClarkSubdivision : MonoBehaviour
                 }
             }
         }
-
+        //calculo de edge point
         for (int i = 0; i < edgeList.Count; i++)
         {
             int a = edgeList[i][0];
             int b = edgeList[i][1];
-            Vector3 mid = (inputMesh.vertices[a] + inputMesh.vertices[b]) * 0.5f;
+            Vector3 mid = (inputMesh.vertices[a] + inputMesh.vertices[b]) * 0.5f;//promedio vertices aristas
 
             if (edgeFaces[i].Count == 2)
             {
-                Vector3 faceAvg = (facePoints[edgeFaces[i][0]] + facePoints[edgeFaces[i][1]]) * 0.5f;
-                edgePoints.Add((mid + faceAvg) * 0.5f);
+                Vector3 faceAvg = (facePoints[edgeFaces[i][0]] + facePoints[edgeFaces[i][1]]) * 0.5f;//promedio face points
+                edgePoints.Add((mid + faceAvg) * 0.5f);// edge point
             }
             else
             {
@@ -175,10 +175,10 @@ public class CatmullClarkSubdivision : MonoBehaviour
                     connectedEdges.Add(e);
             }
 
-            Vector3 F = Vector3.zero;
+            Vector3 Q = Vector3.zero;
             foreach (int fi in adjacentFaces)
-                F += facePoints[fi];
-            F /= adjacentFaces.Count;
+                Q += facePoints[fi];
+            Q /= adjacentFaces.Count;
 
             Vector3 R = Vector3.zero;
             foreach (int ei in connectedEdges)
@@ -186,7 +186,7 @@ public class CatmullClarkSubdivision : MonoBehaviour
             R /= connectedEdges.Count;
 
             int n = adjacentFaces.Count;
-            Vector3 newV = (F + 2 * R + (n - 3) * orig) / n;
+            Vector3 newV = (Q + 2 * R + (n - 3) * orig) / n;
             newVertexPoints.Add(newV);
         }
 
@@ -200,13 +200,13 @@ public class CatmullClarkSubdivision : MonoBehaviour
 
         for (int f = 0; f < inputMesh.faces.Count; f++)
         {
-            var face = inputMesh.faces[f];
-            int fpIndex = facePointOffset + f;
+            var face = inputMesh.faces[f];//recorre todas las caras
+            int fpIndex = facePointOffset + f; // indice del face point
 
             for (int i = 0; i < face.Count; i++)
             {
                 int a = face[i];
-                int b = face[(i + 1) % face.Count];
+                int b = face[(i + 1) % face.Count];//recorre las aristas 
 
                 int edgeAB = -1;
                 int edgePrev = -1;
@@ -215,13 +215,13 @@ public class CatmullClarkSubdivision : MonoBehaviour
                 {
                     var eAB = edgeList[e];
                     if ((eAB[0] == a && eAB[1] == b) || (eAB[0] == b && eAB[1] == a))
-                        edgeAB = edgeOffset + e;
+                        edgeAB = edgeOffset + e; //index edge point siguiente
                     if ((eAB[0] == face[(i - 1 + face.Count) % face.Count] && eAB[1] == a) ||
                         (eAB[1] == face[(i - 1 + face.Count) % face.Count] && eAB[0] == a))
-                        edgePrev = edgeOffset + e;
+                        edgePrev = edgeOffset + e; //index edge point anterior
                 }
 
-                int newA = faceOffset + a;
+                int newA = faceOffset + a; // index nuevo vertice
                 newFaces.Add(new List<int> { newA, edgeAB, fpIndex, edgePrev });
             }
         }
@@ -233,7 +233,7 @@ public class CatmullClarkSubdivision : MonoBehaviour
     {
         var m = new Mesh();
         m.vertices = mesh3D.vertices.ToArray();
-
+        // se divide cada cara en triangulos
         var tris = new List<int>();
         foreach (var face in mesh3D.faces)
         {
