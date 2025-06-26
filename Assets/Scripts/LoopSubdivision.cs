@@ -8,11 +8,20 @@ public class LoopSubdivision : MonoBehaviour
     public int subdivisionLevels = 1;
     public Material subdivisionMaterial;
 
+    [Header("Selection")]
+    public bool isSelectionModeActive = false;
+    public Material highlightMaterial;
+
     [Header("Debug")]
     public bool showDebugInfo = true;
 
     private GameObject currentSubdividedMesh;
-    private Mesh originalCoonMesh; 
+    private Mesh originalCoonMesh;
+    private Camera playerCamera;
+    private GameObject currentHighlightedObject;
+    private Material originalMaterial;
+
+    private Dictionary<string, Mesh> originalMeshes = new Dictionary<string, Mesh>();
 
     public class Edge
     {
@@ -52,6 +61,11 @@ public class LoopSubdivision : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        playerCamera = Camera.main;
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.S))
@@ -63,6 +77,141 @@ public class LoopSubdivision : MonoBehaviour
         {
             RestoreOriginalCoonPatch();
         }
+        if (isSelectionModeActive)
+        {
+            HandleObjectSelection();
+        }
+    }
+
+    public void StartObjectSelection()
+    {
+        isSelectionModeActive = true;
+        Debug.Log("Click on an object to apply loop subdivision. Press ESC to cancel.");
+    }
+
+    void HandleObjectSelection()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            CancelSelection();
+            return;
+        }
+        HandleMouseHover();
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            SelectObjectAtMousePosition();
+        }
+    }
+
+    void HandleMouseHover()
+    {
+        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            GameObject hoveredObject = hit.collider.gameObject;
+
+            if (CanObjectBeSubdivided(hoveredObject))
+            {
+                if (currentHighlightedObject != hoveredObject)
+                {
+                    RemoveHighlight();
+
+                    HighlightObject(hoveredObject);
+                }
+            }
+            else
+                RemoveHighlight();
+        }
+        else
+            RemoveHighlight();
+    }
+
+    void SelectObjectAtMousePosition()
+    {
+        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            GameObject selectedObject = hit.collider.gameObject;
+
+            if (CanObjectBeSubdivided(selectedObject))
+            {
+                ApplyLoopSubdivisionToObject(selectedObject);
+                CancelSelection();
+            }
+            else
+            {
+                Debug.LogWarning($"Selected object '{selectedObject.name}' cannot be subdivided (no MeshFilter or Mesh found).");
+            }
+        }
+    }
+
+    bool CanObjectBeSubdivided(GameObject obj)
+    {
+        MeshFilter meshFilter = obj.GetComponent<MeshFilter>();
+        return meshFilter != null && meshFilter.mesh != null;
+    }
+
+    void ApplyLoopSubdivisionToObject(GameObject targetObject)
+    {
+        MeshFilter meshFilter = targetObject.GetComponent<MeshFilter>();
+
+        if (meshFilter == null || meshFilter.mesh == null)
+        {
+            Debug.LogError($"Selected object '{targetObject.name}' has no mesh!");
+            return;
+        }
+
+        string objectKey = targetObject.name;
+        if (!originalMeshes.ContainsKey(objectKey))
+        {
+            originalMeshes[objectKey] = meshFilter.mesh;
+        }
+
+        Debug.Log($"Applying loop subdivision to '{targetObject.name}'");
+
+        Mesh subdividedMesh = ApplyLoopSubdivision(meshFilter.mesh, subdivisionLevels);
+        CreateSubdividedMeshObject(subdividedMesh, targetObject);
+    }
+
+    void HighlightObject(GameObject obj)
+    {
+        if (highlightMaterial == null) return;
+
+        currentHighlightedObject = obj;
+        Renderer renderer = obj.GetComponent<Renderer>();
+
+        if (renderer != null)
+        {
+            originalMaterial = renderer.material;
+            renderer.material = highlightMaterial;
+        }
+    }
+
+    void RemoveHighlight()
+    {
+        if (currentHighlightedObject != null && originalMaterial != null)
+        {
+            Renderer renderer = currentHighlightedObject.GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                renderer.material = originalMaterial;
+            }
+        }
+
+        currentHighlightedObject = null;
+        originalMaterial = null;
+    }
+
+    void CancelSelection()
+    {
+        isSelectionModeActive = false;
+        RemoveHighlight();
+        Debug.Log("Object selection cancelled.");
     }
 
     [ContextMenu("Apply Loop Subdivision to Coon Patch")]
@@ -89,7 +238,7 @@ public class LoopSubdivision : MonoBehaviour
 
         Mesh subdividedMesh = ApplyLoopSubdivision(originalCoonMesh, subdivisionLevels);
 
-        CreateSubdividedMeshObject(subdividedMesh);
+        CreateSubdividedMeshObject(subdividedMesh, coonPatch);
     }
 
     [ContextMenu("Restore Original Coon Patch")]
@@ -114,6 +263,31 @@ public class LoopSubdivision : MonoBehaviour
         }
     }
 
+    public void RestoreOriginalMesh(GameObject targetObject)
+    {
+        string objectKey = targetObject.name;
+        if (originalMeshes.ContainsKey(objectKey))
+        {
+            MeshFilter meshFilter = targetObject.GetComponent<MeshFilter>();
+            if (meshFilter != null)
+            {
+                meshFilter.mesh = originalMeshes[objectKey];
+
+                MeshCollider meshCollider = targetObject.GetComponent<MeshCollider>();
+                if (meshCollider != null)
+                {
+                    meshCollider.sharedMesh = originalMeshes[objectKey];
+                }
+
+                Debug.Log($"Restored original mesh for '{targetObject.name}'.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"No original mesh stored for '{targetObject.name}'.");
+        }
+    }
+
     public Mesh ApplyLoopSubdivision(Mesh originalMesh, int levels)
     {
         Mesh currentMesh = originalMesh;
@@ -130,7 +304,7 @@ public class LoopSubdivision : MonoBehaviour
     {
         Vector3[] vertices = mesh.vertices;
         int[] triangles = mesh.triangles;
-        Vector2[] uvs = mesh.uv; 
+        Vector2[] uvs = mesh.uv;
 
         List<Vertex> vertexList = new List<Vertex>();
         for (int i = 0; i < vertices.Length; i++)
@@ -155,19 +329,16 @@ public class LoopSubdivision : MonoBehaviour
             AddEdge(edgeDict, v3, v1, i / 3);
         }
 
-        // Step 1: Compute new edge points
         foreach (var edge in edgeDict.Values)
         {
             edge.newPoint = ComputeNewEdgePoint(edge, vertexList, triangles);
         }
 
-        // Step 2: Compute new vertex points
         foreach (var vertex in vertexList)
         {
             vertex.newPosition = ComputeNewVertexPoint(vertex, vertexList);
         }
 
-        // Step 3: Generate new mesh
         return GenerateSubdividedMesh(vertexList, edgeDict, triangles, uvs);
     }
 
@@ -203,7 +374,6 @@ public class LoopSubdivision : MonoBehaviour
             return (v1 + v2) * 0.5f;
         }
 
-        // Find vleft and vright
         Vector3 vleft = Vector3.zero, vright = Vector3.zero;
         bool foundLeft = false;
 
@@ -243,8 +413,7 @@ public class LoopSubdivision : MonoBehaviour
         if (n == 3)
         {
             alpha = 3.0f / 16.0f;
-        }
-        else
+        } else
         {
             // alpha = (1/n)[5/8 - (3/8 + 1/4 * cos(2pi/n))^2]
             float cosValue = Mathf.Cos(2.0f * Mathf.PI / n);
@@ -329,9 +498,26 @@ public class LoopSubdivision : MonoBehaviour
         triangles.Add(v3);
     }
 
-    void CreateSubdividedMeshObject(Mesh mesh)
+    void CreateSubdividedMeshObject(Mesh mesh, GameObject targetObject = null)
     {
-        // Instead of creating a new object, update the existing Coon patch
+        if (targetObject != null)
+        {
+            MeshFilter meshFilter = targetObject.GetComponent<MeshFilter>();
+            if (meshFilter != null)
+            {
+                meshFilter.mesh = mesh;
+
+                MeshCollider meshCollider = targetObject.GetComponent<MeshCollider>();
+                if (meshCollider != null)
+                {
+                    meshCollider.sharedMesh = mesh;
+                }
+
+                Debug.Log($"{targetObject.name} smoothed with Loop subdivision! Mesh now has {mesh.vertexCount} vertices and {mesh.triangles.Length / 3} triangles.");
+                return;
+            }
+        }
+
         GameObject coonPatch = GameObject.Find("CoonPatch");
         if (coonPatch != null)
         {
@@ -353,46 +539,14 @@ public class LoopSubdivision : MonoBehaviour
             }
         }
 
-        // Fallback: create new object if Coon patch not found
-        if (currentSubdividedMesh != null)
-        {
-            DestroyImmediate(currentSubdividedMesh);
-        }
-
-        currentSubdividedMesh = new GameObject("LoopSubdividedMesh");
-        MeshFilter meshFilter2 = currentSubdividedMesh.AddComponent<MeshFilter>();
-        MeshRenderer meshRenderer = currentSubdividedMesh.AddComponent<MeshRenderer>();
-        MeshCollider meshCollider2 = currentSubdividedMesh.AddComponent<MeshCollider>();
-
-        meshFilter2.mesh = mesh;
-
-        if (subdivisionMaterial != null)
-            meshRenderer.material = subdivisionMaterial;
-        else
-        {
-            // Create a default material with different color
-            Material defaultMat = new Material(Shader.Find("Standard"));
-            defaultMat.color = Color.cyan;
-            meshRenderer.material = defaultMat;
-        }
-
         Debug.Log($"New mesh has {mesh.vertexCount} vertices and {mesh.triangles.Length / 3} triangles.");
-    }
-
-    void ClearSubdividedMesh()
-    {
-        if (currentSubdividedMesh != null)
-        {
-            DestroyImmediate(currentSubdividedMesh);
-            currentSubdividedMesh = null;
-        }
     }
 
     void OnGUI()
     {
         if (!showDebugInfo) return;
 
-        GUILayout.BeginArea(new Rect(320, 10, 300, 200));
+        GUILayout.BeginArea(new Rect(320, 10, 300, 250));
 
         GUILayout.Label($"Subdivision Levels: {subdivisionLevels}");
         subdivisionLevels = (int)GUILayout.HorizontalSlider(subdivisionLevels, 1, 4);
@@ -405,6 +559,28 @@ public class LoopSubdivision : MonoBehaviour
         if (GUILayout.Button("Restore Original Mesh"))
         {
             RestoreOriginalCoonPatch();
+        }
+
+        GUILayout.Space(10);
+
+        if (isSelectionModeActive)
+        {
+            GUI.color = Color.yellow;
+            if (GUILayout.Button("Cancel Selection (ESC)"))
+            {
+                CancelSelection();
+            }
+            GUI.color = Color.white;
+            GUILayout.Label("Click on an object to subdivide it");
+        }
+        else
+        {
+            GUI.color = Color.green;
+            if (GUILayout.Button("Select Object to Subdivide"))
+            {
+                StartObjectSelection();
+            }
+            GUI.color = Color.white;
         }
 
         GUILayout.EndArea();

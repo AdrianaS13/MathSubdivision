@@ -11,10 +11,18 @@ public class ButterflySubdivision : MonoBehaviour
     [Header("Debug")]
     public bool showDebugInfo = true;
 
+
+    public bool isSelectionModeActive = false;
+    public Material highlightMaterial;
+
     private GameObject currentSubdividedMesh;
     private Mesh originalCoonMesh;
+    private Camera playerCamera;
+    private GameObject currentHighlightedObject;
+    private Material originalMaterial;
 
-    // Mesh topology data structures
+    private Dictionary<string, Mesh> originalMeshes = new Dictionary<string, Mesh>();
+
     public class HalfEdge
     {
         public int vertex; // The vertex this half-edge points to
@@ -26,9 +34,8 @@ public class ButterflySubdivision : MonoBehaviour
 
     public class Face
     {
-        public int[] vertices = new int[3]; // Triangle vertices
-        public HalfEdge[] halfEdges = new HalfEdge[3]; // Half-edges of this face
-
+        public int[] vertices = new int[3];
+        public HalfEdge[] halfEdges = new HalfEdge[3]; 
         public Face(int v0, int v1, int v2)
         {
             vertices[0] = v0;
@@ -37,6 +44,10 @@ public class ButterflySubdivision : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        playerCamera = Camera.main;
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.B))
@@ -48,6 +59,145 @@ public class ButterflySubdivision : MonoBehaviour
         {
             RestoreOriginalCoonPatch();
         }
+        if (isSelectionModeActive)
+        {
+            HandleObjectSelection();
+        }
+    }
+
+    public void StartObjectSelection()
+    {
+        isSelectionModeActive = true;
+        Debug.Log("Click on an object to apply loop subdivision. Press ESC to cancel.");
+    }
+
+    void HandleObjectSelection()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            CancelSelection();
+            return;
+        }
+        HandleMouseHover();
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            SelectObjectAtMousePosition();
+        }
+    }
+
+    void HandleMouseHover()
+    {
+        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            GameObject hoveredObject = hit.collider.gameObject;
+
+            if (CanObjectBeSubdivided(hoveredObject))
+            {
+                if (currentHighlightedObject != hoveredObject)
+                {
+                    RemoveHighlight();
+
+                    HighlightObject(hoveredObject);
+                }
+            }
+            else
+            {
+                RemoveHighlight();
+            }
+        }
+        else
+        {
+            RemoveHighlight();
+        }
+    }
+
+    void SelectObjectAtMousePosition()
+    {
+        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            GameObject selectedObject = hit.collider.gameObject;
+
+            if (CanObjectBeSubdivided(selectedObject))
+            {
+                ApplyButterflySubdivisionToObject(selectedObject);
+                CancelSelection();
+            }
+            else
+            {
+                Debug.LogWarning($"Selected object '{selectedObject.name}' cannot be subdivided (no MeshFilter or Mesh found).");
+            }
+        }
+    }
+
+    void ApplyButterflySubdivisionToObject(GameObject targetObject)
+    {
+        MeshFilter meshFilter = targetObject.GetComponent<MeshFilter>();
+
+        if (meshFilter == null || meshFilter.mesh == null)
+        {
+            Debug.LogError($"Selected object '{targetObject.name}' has no mesh!");
+            return;
+        }
+
+        string objectKey = targetObject.name;
+        if (!originalMeshes.ContainsKey(objectKey))
+        {
+            originalMeshes[objectKey] = meshFilter.mesh;
+        }
+
+        Debug.Log($"Applying loop subdivision to '{targetObject.name}'");
+
+        Mesh subdividedMesh = ApplyButterflySubdivision(meshFilter.mesh, subdivisionLevels);
+        CreateSubdividedMeshObject(subdividedMesh, targetObject);
+    }
+
+    bool CanObjectBeSubdivided(GameObject obj)
+    {
+        MeshFilter meshFilter = obj.GetComponent<MeshFilter>();
+        return meshFilter != null && meshFilter.mesh != null;
+    }
+
+    void HighlightObject(GameObject obj)
+    {
+        if (highlightMaterial == null) return;
+
+        currentHighlightedObject = obj;
+        Renderer renderer = obj.GetComponent<Renderer>();
+
+        if (renderer != null)
+        {
+            originalMaterial = renderer.material;
+            renderer.material = highlightMaterial;
+        }
+    }
+
+    void RemoveHighlight()
+    {
+        if (currentHighlightedObject != null && originalMaterial != null)
+        {
+            Renderer renderer = currentHighlightedObject.GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                renderer.material = originalMaterial;
+            }
+        }
+
+        currentHighlightedObject = null;
+        originalMaterial = null;
+    }
+
+    void CancelSelection()
+    {
+        isSelectionModeActive = false;
+        RemoveHighlight();
+        Debug.Log("Object selection cancelled.");
     }
 
     [ContextMenu("Apply Butterfly Subdivision to Coon Patch")]
@@ -73,7 +223,7 @@ public class ButterflySubdivision : MonoBehaviour
         }
 
         Mesh subdividedMesh = ApplyButterflySubdivision(originalCoonMesh, subdivisionLevels);
-        UpdateCoonPatchMesh(subdividedMesh);
+        CreateSubdividedMeshObject(subdividedMesh);
     }
 
     [ContextMenu("Restore Original Coon Patch")]
@@ -213,7 +363,6 @@ public class ButterflySubdivision : MonoBehaviour
             return (v1 + v2) * 0.5f;
         }
 
-        // Get the butterfly stencil vertices
         ButterflyStencil stencil = GetButterflyStencil(halfEdge, vertices, faces);
 
         if (!stencil.isValid)
@@ -222,7 +371,7 @@ public class ButterflySubdivision : MonoBehaviour
             return (v1 + v2) * 0.5f;
         }
 
-        // Apply butterfly formula: 1/2(v1 + v2) + 1/8(opp1 + opp2) - 1/16(wing1 + wing2 + wing3 + wing4)
+        //1/2(v1 + v2) + 1/8(opp1 + opp2) - 1/16(wing1 + wing2 + wing3 + wing4)
         Vector3 edgeCenter = 0.5f * (v1 + v2);
         Vector3 oppositeSum = 0.125f * (stencil.opposite1 + stencil.opposite2);
         Vector3 wingSum = -0.0625f * (stencil.wing1 + stencil.wing2 + stencil.wing3 + stencil.wing4);
@@ -243,8 +392,8 @@ public class ButterflySubdivision : MonoBehaviour
     public struct ButterflyStencil
     {
         public bool isValid;
-        public Vector3 opposite1, opposite2; // The two vertices opposite to the edge
-        public Vector3 wing1, wing2, wing3, wing4; // The four wing vertices
+        public Vector3 opposite1, opposite2; 
+        public Vector3 wing1, wing2, wing3, wing4;
     }
 
     ButterflyStencil GetButterflyStencil(HalfEdge halfEdge, Vector3[] vertices, List<Face> faces)
@@ -316,7 +465,6 @@ public class ButterflySubdivision : MonoBehaviour
         List<Vector3> wings = new List<Vector3>();
 
         // Find triangles adjacent to the opposite vertices that form the wings
-
         HashSet<int> usedVertices = new HashSet<int> { edgeStart, edgeEnd, opposite1, opposite2 };
 
         // Find faces containing opposite1 but not the edge vertices
@@ -451,8 +599,26 @@ public class ButterflySubdivision : MonoBehaviour
         triangles.Add(v3);
     }
 
-    void UpdateCoonPatchMesh(Mesh mesh)
+    void CreateSubdividedMeshObject(Mesh mesh, GameObject targetObject = null)
     {
+        if (targetObject != null)
+        {
+            MeshFilter meshFilter = targetObject.GetComponent<MeshFilter>();
+            if (meshFilter != null)
+            {
+                meshFilter.mesh = mesh;
+
+                MeshCollider meshCollider = targetObject.GetComponent<MeshCollider>();
+                if (meshCollider != null)
+                {
+                    meshCollider.sharedMesh = mesh;
+                }
+
+                Debug.Log($"{targetObject.name} smoothed with Loop subdivision! Mesh now has {mesh.vertexCount} vertices and {mesh.triangles.Length / 3} triangles.");
+                return;
+            }
+        }
+
         GameObject coonPatch = GameObject.Find("CoonPatch");
         if (coonPatch != null)
         {
@@ -470,8 +636,9 @@ public class ButterflySubdivision : MonoBehaviour
                 Debug.Log($"Butterfly subdivision applied! Mesh now has {mesh.vertexCount} vertices and {mesh.triangles.Length / 3} triangles.");
             }
         }
-    }
 
+        Debug.Log($"New mesh has {mesh.vertexCount} vertices and {mesh.triangles.Length / 3} triangles.");
+    }
     void OnGUI()
     {
         if (!showDebugInfo) return;
@@ -490,6 +657,29 @@ public class ButterflySubdivision : MonoBehaviour
         {
             RestoreOriginalCoonPatch();
         }
+
+        GUILayout.Space(10);
+
+        if (isSelectionModeActive)
+        {
+            GUI.color = Color.yellow;
+            if (GUILayout.Button("Cancel Selection (ESC)"))
+            {
+                CancelSelection();
+            }
+            GUI.color = Color.white;
+            GUILayout.Label("Click on an object to subdivide it");
+        }
+        else
+        {
+            GUI.color = Color.green;
+            if (GUILayout.Button("Select Object to Subdivide"))
+            {
+                StartObjectSelection();
+            }
+            GUI.color = Color.white;
+        }
+
         GUILayout.EndArea();
     }
 }
