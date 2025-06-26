@@ -16,17 +16,17 @@ public class CatmullClarkSubdivision : MonoBehaviour
     private int currentSubdivisionLevel = -1;
     private Mesh3D currentMesh3D;
 
-    private struct Mesh3D
-    {
-        public List<Vector3> vertices;
-        public List<List<int>> faces;
+    //private struct Mesh3D
+    //{
+    //    public List<Vector3> vertices;
+    //    public List<List<int>> faces;
 
-        public Mesh3D(List<Vector3> v, List<List<int>> f)
-        {
-            vertices = v;
-            faces = f;
-        }
-    }
+    //    public Mesh3D(List<Vector3> v, List<List<int>> f)
+    //    {
+    //        vertices = v;
+    //        faces = f;
+    //    }
+    //}
 
     void Start()
     {
@@ -56,7 +56,8 @@ public class CatmullClarkSubdivision : MonoBehaviour
             mesh = ApplyCatmullClark(mesh);
         }
 
-        meshFilter.mesh = ConvertToUnityMesh(mesh);
+        //meshFilter.mesh = MeshConverter.ToUnityMeshFlatShading(mesh); 
+        meshFilter.mesh = ToUnityMesh(mesh);
         currentMesh3D = mesh;
     }
 
@@ -87,7 +88,7 @@ public class CatmullClarkSubdivision : MonoBehaviour
         return new Mesh3D(v, f);
     }
 
-    Mesh3D ApplyCatmullClark(Mesh3D inputMesh)
+    public Mesh3D ApplyCatmullClark(Mesh3D inputMesh)
     {
         var newVertices = new List<Vector3>();
         var newFaces = new List<List<int>>();
@@ -229,7 +230,7 @@ public class CatmullClarkSubdivision : MonoBehaviour
         return new Mesh3D(newVertices, newFaces);
     }
 
-    Mesh ConvertToUnityMesh(Mesh3D mesh3D)
+    Mesh ToUnityMesh(Mesh3D mesh3D)
     {
         var m = new Mesh();
         m.vertices = mesh3D.vertices.ToArray();
@@ -258,7 +259,7 @@ public class CatmullClarkSubdivision : MonoBehaviour
         m.RecalculateBounds();
         return m;
     }
-
+   
     void OnDrawGizmos()
     {
         if (!showWireframe || currentMesh3D.vertices == null) return;

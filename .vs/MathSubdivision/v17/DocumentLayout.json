@@ -3,24 +3,48 @@
   "WorkspaceRootPath": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|c:\\users\\adria\\documents\\adriana\\esgi\\5\\semestre2\\math\\mathsubdivision\\assets\\scripts\\sqrtkobbeltsubdivision.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\assets\\scripts\\sqrtkobbeltsubdivision.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\sqrtkobbeltsubdivision.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|c:\\users\\adria\\documents\\adriana\\esgi\\5\\semestre2\\math\\mathsubdivision\\assets\\scripts\\meshconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\meshconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\assets\\scripts\\catmullclarksubdivision.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\catmullclarksubdivision.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|c:\\users\\adria\\documents\\adriana\\esgi\\5\\semestre2\\math\\mathsubdivision\\assets\\scripts\\butterflysubdivision.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\butterflysubdivision.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\assets\\scripts\\subdivisioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\subdivisioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\adria\\Downloads\\SubdivisionUnityScripts\\Scripts\\Mesh3D.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\adria\\Downloads\\SubdivisionUnityScripts\\Scripts\\SubdivisionController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\adria\\Downloads\\SubdivisionUnityScripts\\Scripts\\MeshGenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\adria\\Downloads\\SubdivisionUnityScripts\\Scripts\\MeshConverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\assets\\scripts\\coonpatchgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\coonpatchgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\assets\\scripts\\loopsubdivision.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\loopsubdivision.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\assets\\scripts\\coonpatchgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\coonpatchgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\assets\\scripts\\uisubdivision.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\uisubdivision.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\assets\\scripts\\butterflysubdivision.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\butterflysubdivision.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7AEE00DF-6116-1823-6D71-445A504561ED}|Assembly-CSharp.csproj|C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\assets\\scripts\\cameramovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -46,11 +70,36 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MeshConverter.cs",
+              "DocumentMoniker": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\MeshConverter.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\MeshConverter.cs",
+              "ToolTip": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\MeshConverter.cs",
+              "RelativeToolTip": "Assets\\Scripts\\MeshConverter.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T21:12:58.544Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "SubdivisionController.cs",
+              "DocumentMoniker": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\SubdivisionController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\SubdivisionController.cs",
+              "ToolTip": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\SubdivisionController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\SubdivisionController.cs",
+              "ViewState": "AQIAAEwAAAAAAAAAAAArwGkAAAA2AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T20:46:57.199Z"
             },
             {
               "$type": "Document",
@@ -60,39 +109,98 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\SqrtKobbeltSubdivision.cs",
               "ToolTip": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\SqrtKobbeltSubdivision.cs",
               "RelativeToolTip": "Assets\\Scripts\\SqrtKobbeltSubdivision.cs",
-              "ViewState": "AQIAAOYAAAAAAAAAAAAgwD8BAAABAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-26T20:36:36.137Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "CatmullClarkSubdivision.cs",
               "DocumentMoniker": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\CatmullClarkSubdivision.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\CatmullClarkSubdivision.cs",
               "ToolTip": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\CatmullClarkSubdivision.cs",
               "RelativeToolTip": "Assets\\Scripts\\CatmullClarkSubdivision.cs",
-              "ViewState": "AQIAAPYAAAAAAAAAAAAkwAEBAAAeAAAA",
+              "ViewState": "AQIAANgAAAAAAAAAAAAiwOgAAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-25T15:02:48.411Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-25T15:02:48.411Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Mesh3D.cs",
+              "DocumentMoniker": "C:\\Users\\adria\\Downloads\\SubdivisionUnityScripts\\Scripts\\Mesh3D.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\..\\Downloads\\SubdivisionUnityScripts\\Scripts\\Mesh3D.cs",
+              "ToolTip": "C:\\Users\\adria\\Downloads\\SubdivisionUnityScripts\\Scripts\\Mesh3D.cs",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\..\\Downloads\\SubdivisionUnityScripts\\Scripts\\Mesh3D.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T20:45:43.834Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
+              "Title": "SubdivisionController.cs",
+              "DocumentMoniker": "C:\\Users\\adria\\Downloads\\SubdivisionUnityScripts\\Scripts\\SubdivisionController.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\..\\Downloads\\SubdivisionUnityScripts\\Scripts\\SubdivisionController.cs",
+              "ToolTip": "C:\\Users\\adria\\Downloads\\SubdivisionUnityScripts\\Scripts\\SubdivisionController.cs",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\..\\Downloads\\SubdivisionUnityScripts\\Scripts\\SubdivisionController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T20:46:19.324Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MeshGenerator.cs",
+              "DocumentMoniker": "C:\\Users\\adria\\Downloads\\SubdivisionUnityScripts\\Scripts\\MeshGenerator.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\..\\Downloads\\SubdivisionUnityScripts\\Scripts\\MeshGenerator.cs",
+              "ToolTip": "C:\\Users\\adria\\Downloads\\SubdivisionUnityScripts\\Scripts\\MeshGenerator.cs",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\..\\Downloads\\SubdivisionUnityScripts\\Scripts\\MeshGenerator.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T20:46:11.199Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "MeshConverter.cs",
+              "DocumentMoniker": "C:\\Users\\adria\\Downloads\\SubdivisionUnityScripts\\Scripts\\MeshConverter.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\..\\Downloads\\SubdivisionUnityScripts\\Scripts\\MeshConverter.cs",
+              "ToolTip": "C:\\Users\\adria\\Downloads\\SubdivisionUnityScripts\\Scripts\\MeshConverter.cs",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\..\\Downloads\\SubdivisionUnityScripts\\Scripts\\MeshConverter.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T20:45:54.06Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "UISubdivision.cs",
+              "DocumentMoniker": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\UISubdivision.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\UISubdivision.cs",
+              "ToolTip": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\UISubdivision.cs",
+              "RelativeToolTip": "Assets\\Scripts\\UISubdivision.cs",
+              "ViewState": "AQIAAFYAAAAAAAAAAAAswAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T20:44:15.505Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "CameraMovement.cs",
               "DocumentMoniker": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\CameraMovement.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\CameraMovement.cs",
               "ToolTip": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\CameraMovement.cs",
               "RelativeToolTip": "Assets\\Scripts\\CameraMovement.cs",
-              "ViewState": "AgIAADUAAAAAAAAAAAAwwAQAAAAJAAAAAAAAAA==",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-25T12:50:18.706Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 11,
               "Title": "ButterflySubdivision.cs",
               "DocumentMoniker": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\ButterflySubdivision.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\ButterflySubdivision.cs",
@@ -100,66 +208,65 @@
               "RelativeToolTip": "Assets\\Scripts\\ButterflySubdivision.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-25T10:40:36.784Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-25T10:40:36.784Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 9,
               "Title": "LoopSubdivision.cs",
               "DocumentMoniker": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\LoopSubdivision.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\LoopSubdivision.cs",
               "ToolTip": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\LoopSubdivision.cs",
               "RelativeToolTip": "Assets\\Scripts\\LoopSubdivision.cs",
-              "ViewState": "AgIAACIBAAAAAAAAAAAuwDwBAAAzAAAAAAAAAA==",
+              "ViewState": "AQIAAFEAAAAAAAAAAAAIwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-25T08:50:43.487Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "CoonPatchGenerator.cs",
               "DocumentMoniker": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\CoonPatchGenerator.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\CoonPatchGenerator.cs",
               "ToolTip": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\CoonPatchGenerator.cs",
               "RelativeToolTip": "Assets\\Scripts\\CoonPatchGenerator.cs",
-              "ViewState": "AgIAAOkAAAAAAAAAAAAcwP8AAAAkAAAAAAAAAA==",
+              "ViewState": "AQIAAGIAAAAAAAAAAAAgwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-24T13:53:58.81Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 13,
               "Title": "Polyline.cs",
               "DocumentMoniker": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\Polyline.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Polyline.cs",
               "ToolTip": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\Polyline.cs",
               "RelativeToolTip": "Assets\\Scripts\\Polyline.cs",
-              "ViewState": "AgIAADMAAAAAAAAAAAAowBsAAABJAAAAAAAAAA==",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-23T09:02:55.78Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 14,
               "Title": "CurveManager.cs",
               "DocumentMoniker": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\CurveManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\CurveManager.cs",
               "ToolTip": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\CurveManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\CurveManager.cs",
-              "ViewState": "AgIAAFMAAAAAAAAAAAAcwHAAAAAUAAAAAAAAAA==",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-23T15:13:37.544Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 15,
               "Title": "ChaikinCurve.cs",
               "DocumentMoniker": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\ChaikinCurve.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\ChaikinCurve.cs",
               "ToolTip": "C:\\Users\\adria\\Documents\\Adriana\\ESGI\\5\\Semestre2\\Math\\MathSubdivision\\Assets\\Scripts\\ChaikinCurve.cs",
               "RelativeToolTip": "Assets\\Scripts\\ChaikinCurve.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAQwA8AAAArAAAAAAAAAA==",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-23T09:22:38.24Z"
             }

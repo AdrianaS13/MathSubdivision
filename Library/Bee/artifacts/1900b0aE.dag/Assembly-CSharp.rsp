@@ -362,8 +362,12 @@
 "Assets/Scripts/CoonPatchGenerator.cs"
 "Assets/Scripts/CurveManager.cs"
 "Assets/Scripts/LoopSubdivision.cs"
+"Assets/Scripts/Mesh3D.cs"
+"Assets/Scripts/MeshConverter.cs"
+"Assets/Scripts/MeshGenerator.cs"
 "Assets/Scripts/Polyline.cs"
 "Assets/Scripts/SqrtKobbeltSubdivision.cs"
+"Assets/Scripts/SubdivisionController.cs"
 "Assets/Scripts/UIManager.cs"
 "Assets/Scripts/UISubdivision.cs"
 -langversion:9.0

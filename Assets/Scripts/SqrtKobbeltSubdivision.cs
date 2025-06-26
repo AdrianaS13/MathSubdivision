@@ -5,7 +5,7 @@ public class SqrtKobbeltSubdivision : MonoBehaviour
 {
     [Range(0, 7)] public int subdivisionLevel2 = 0;
     public Material meshMaterial;
-    public bool showDebugGizmos = true;
+    public bool showDebugGizmos = false;
 
     private MeshFilter meshFilter;
     private MeshRenderer meshRenderer;
@@ -15,18 +15,6 @@ public class SqrtKobbeltSubdivision : MonoBehaviour
     private List<List<int>> debugFaces;
     private List<(Vector3, Vector3)> debugFlipConnections;
     private List<Vector3> debugCenters;
-
-    private class MeshData
-    {
-        public List<Vector3> vertices;
-        public List<List<int>> faces;
-
-        public MeshData(List<Vector3> v, List<List<int>> f)
-        {
-            vertices = v;
-            faces = f;
-        }
-    }
 
     void Start()
     {
@@ -45,13 +33,14 @@ public class SqrtKobbeltSubdivision : MonoBehaviour
     void UpdateMesh()
     {
         lastSubdivision = subdivisionLevel2;
-        MeshData mesh = CreateTriangulatedCube();
+        Mesh3D mesh = CreateTriangulatedCube();
         for (int i = 0; i < subdivisionLevel2; i++)
             mesh = ApplySqrt3Subdivision(mesh);
-        meshFilter.mesh = ToUnityMesh(mesh);
+        meshFilter.mesh = MeshConverter.ToUnityMeshFlatShading(mesh);
+        
     }
 
-    MeshData CreateTriangulatedCube()
+    Mesh3D CreateTriangulatedCube()
     {
         var v = new List<Vector3>
         {
@@ -71,7 +60,7 @@ public class SqrtKobbeltSubdivision : MonoBehaviour
             new List<int>{1,7,6}, new List<int>{1,6,2}
         };
 
-        return new MeshData(v, f);
+        return new Mesh3D(v, f);
     }
 
 
@@ -100,7 +89,7 @@ public class SqrtKobbeltSubdivision : MonoBehaviour
         }
     }
 
-    MeshData ApplySqrt3Subdivision(MeshData input)
+    public Mesh3D ApplySqrt3Subdivision(Mesh3D input)
     {
         var oldVerts = input.vertices;
         var oldFaces = input.faces;
@@ -249,11 +238,11 @@ public class SqrtKobbeltSubdivision : MonoBehaviour
         debugVertices = newVerts;
         debugFaces = finalFaces;
 
-        return new MeshData(newVerts, finalFaces);
+        return new Mesh3D(newVerts, finalFaces);
     }
 
 
-    Mesh ToUnityMesh(MeshData mesh)
+    Mesh ToUnityMesh(Mesh3D mesh)
     {
         Mesh m = new Mesh();
         m.name = "KobbeltSubdividedMesh";
